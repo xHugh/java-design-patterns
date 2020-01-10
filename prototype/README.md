@@ -3,12 +3,10 @@ layout: pattern
 title: Prototype
 folder: prototype
 permalink: /patterns/prototype/
-pumlid: HSV13OCm30NGLM00udktCS62eCInxE-YRj_UUdjlRLfx7fBUbmkmU14vF-Lik7BF4AzJ8OfIvw3Mys6mqyrltWw9Tkfc38XhqE3uWSmd9Zuc9AZ_bVHHB4V_0W00
 categories: Creational
 tags: 
- - Java
  - Gang Of Four
- - Difficulty-Beginner
+ - Instantiation
 ---
 
 ## Intent
@@ -34,22 +32,26 @@ In short, it allows you to create a copy of an existing object and modify it to 
 
 In Java, it can be easily done by implementing `Cloneable` and overriding `clone` from `Object`
 
-```
+```java
 class Sheep implements Cloneable {
   private String name;
   public Sheep(String name) { this.name = name; }
   public void setName(String name) { this.name = name; }
   public String getName() { return name; }
   @Override
-  public Sheep clone() throws CloneNotSupportedException {
-    return new Sheep(name);
+  public Sheep clone() {
+    try {
+      return (Sheep)super.clone();
+    } catch(CloneNotSuportedException) {
+      throw new InternalError();
+    }
   }
 }
 ```
 
 Then it can be cloned like below
 
-```
+```java
 Sheep original = new Sheep("Jolly");
 System.out.println(original.getName()); // Jolly
 
@@ -59,13 +61,16 @@ cloned.setName("Dolly");
 System.out.println(cloned.getName()); // Dolly
 ```
 
+## Class diagram
+![alt text](./etc/prototype.urm.png "Prototype pattern class diagram")
+
 ## Applicability
 Use the Prototype pattern when a system should be independent of how its products are created, composed and represented; and
 
-* when the classes to instantiate are specified at run-time, for example, by dynamic loading
-* to avoid building a class hierarchy of factories that parallels the class hierarchy of products
-* when instances of a class can have one of only a few different combinations of state. It may be more convenient to install a corresponding number of prototypes and clone them rather than instantiating the class manually, each time with the appropriate state
-* when object creation is expensive compared to cloning
+* When the classes to instantiate are specified at run-time, for example, by dynamic loading
+* To avoid building a class hierarchy of factories that parallels the class hierarchy of products
+* When instances of a class can have one of only a few different combinations of state. It may be more convenient to install a corresponding number of prototypes and clone them rather than instantiating the class manually, each time with the appropriate state
+* When object creation is expensive compared to cloning
 
 ## Real world examples
 

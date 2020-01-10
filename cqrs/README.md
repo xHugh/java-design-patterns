@@ -3,16 +3,16 @@ layout: pattern
 title: CQRS
 folder: cqrs
 permalink: /patterns/cqrs/
-pumlid: 7SPR4a0m3030gt00pR_RH6I8QQFouFgC_TfHb6gkd5Q7FQBx363ub4rYpoMTZKuDrYXqDX37HIuuyCPfPPTDfuuHREhGqBy0NUR0GNzAMYizMtq1
 categories: Architectural
 tags:
- - Java
- - Difficulty-Intermediate
+ - Performance
+ - Cloud distributed
 ---
 
 ## Intent
 CQRS Command Query Responsibility Segregation - Separate the query side from the command side.
 
+## Class diagram
 ![alt text](./etc/cqrs.png "CQRS")
 
 ## Applicability
